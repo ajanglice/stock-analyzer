@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const PortfolioInsights = ({ aiInsights }) => {
-  const [showInsights, setShowInsights] = useState(false);
+  const [showInsights, setShowInsights] = useState(true);
 
   return (
     <div style={{ marginBottom: '20px' }}>
