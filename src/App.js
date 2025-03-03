@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
+import Analysis from './Analysis';
 import PortfolioCharts from './PortfolioCharts';  // Add this with your other imports
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
   const [companyResults, setCompanyResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [showInsights, setShowInsights] = useState(false);
   
   const currentDate = new Date().toLocaleDateString('en-US', { 
     year: 'numeric', 
@@ -737,6 +739,10 @@ function App() {
       }
 
 
+
+
+
+
       setPortfolioAnalysis({
         stocks: stocksWithData,
         totalValue: `${totalValue.toFixed(2)}`,
@@ -1048,24 +1054,53 @@ function App() {
             </div>
           </div>
 
-          <div style={{ marginBottom: '2px' }}>
-            <h3 style={{ color: '#0078d4', fontSize: '1.1em', marginBottom: '8px' }}>Portfolio Insights</h3>
-            <div style={{ 
-              display: 'grid',
-              gap: '12px'
-            }}>
-              {portfolioAnalysis.aiInsights.map((insight, index) => (
-                <div key={index} style={{ 
-                  padding: '12px',
-                  backgroundColor: '#f8f9fa',
-                  borderRadius: '4px',
-                  fontSize: '0.9em'
-                }}>
-                  {insight}
-                </div>
-              ))}
-            </div>
-          </div>
+
+
+
+<div style={{ marginBottom: '20px' }}>
+  <h3 style={{ 
+    color: '#0078d4', 
+    fontSize: '1.1em', 
+    marginBottom: '12px',
+    display: 'flex',
+    alignItems: 'center',
+    cursor: 'pointer'
+  }}
+  onClick={() => setShowInsights(!showInsights)}>
+    <span style={{ 
+      marginRight: '8px',
+      display: 'inline-block',
+      width: '16px',
+      textAlign: 'center'
+    }}>
+      {showInsights ? '▼' : '►'}
+    </span>
+    Portfolio Insights
+  </h3>
+  
+  {showInsights && (
+    <div style={{ 
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+      gap: '12px',
+      maxHeight: '300px',
+      overflowY: 'auto',
+      padding: '4px'
+    }}>
+      {portfolioAnalysis.aiInsights.map((insight, index) => (
+        <div key={index} style={{ 
+          padding: '12px',
+          backgroundColor: '#f8f9fa',
+          borderRadius: '4px',
+          fontSize: '0.9em',
+          border: '1px solid #e0e0e0'
+        }}>
+          {insight}
+        </div>
+      ))}
+    </div>
+  )}
+</div>
 
           <div>
             <h3 style={{ color: '#0078d4', fontSize: '1.1em', marginBottom: '8px' }}>Holdings</h3>
@@ -1098,6 +1133,8 @@ function App() {
               ))}
             </div>
           </div>
+{/* Right after your Holdings section */}
+<Analysis portfolioAnalysis={portfolioAnalysis} />
         </div>
       )}
     </div>
