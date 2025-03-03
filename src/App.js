@@ -992,7 +992,7 @@ function App() {
             </div>
           </div>
 
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', marginBottom: '32px' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', marginBottom: '72px' }}>
             <div style={{ flex: '1 1 300px', height: '340px' }}>
               <h3 style={{ color: '#0078d4', fontSize: '1.1em', marginBottom: '8px' }}>Sector Allocation</h3>
               <ResponsiveContainer>
